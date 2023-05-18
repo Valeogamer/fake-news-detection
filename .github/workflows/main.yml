@@ -26,7 +26,7 @@ jobs:
           rm -rf ./data
       
       - name: Upload CSV files as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: csv-files
           path: |
@@ -42,3 +42,8 @@ jobs:
       - name: Test data
         run: |
           python test.py
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: csv_fi
+          path: Test.csv
