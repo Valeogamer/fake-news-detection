@@ -6,3 +6,5 @@ data_fake = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detecti
 data_true = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/True.csv')
 print(data_fake.head())
 print(data_true.head())
+a = data_fake.head()
+a.to_csv('Test.csv')
