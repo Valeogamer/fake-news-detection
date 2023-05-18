@@ -23,9 +23,6 @@ jobs:
         env:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-        run: |
-          mkdir /root/.kaggle/
-          echo '{"username": "${KAGGLE_USERNAME}", "key": "${KAGGLE_KEY}"}' > /root/.kaggle/kaggle.json
 
       - name: Download dataset from Kaggle
         run: kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset
