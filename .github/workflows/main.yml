@@ -23,8 +23,6 @@ jobs:
         env:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_API_KEY }}
-
-      - name: Download dataset from Kaggle
         run: |
           kaggle datasets download <dataset-name> --unzip -p ./data
       
