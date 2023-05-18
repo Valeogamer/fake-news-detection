@@ -4,34 +4,40 @@ on:
   workflow_dispatch:
 
 jobs:
-  download_dataset:
+  download-and-save-dataset:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install Kaggle API
-      run: pip install kaggle
-    - name: Download dataset from Kaggle
-      env:
-        KAGGLE_USERNAME: ${{ secrets.KAGGLE_N }}
-        KAGGLE_KEY: ${{ secrets.KAGGLE_K }}
-      run: |
-        kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset -p data/      
-    - name: Upload to Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: my-dataset
-        path: data.zip
-    - name: Install Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.9
-    - name: Upgrade pip
-      run: pip install --upgrade pip
-    - name: Install dependencies
-      run: pip install -r req.txt
-    - name: Process data
-      run: |
-        python test.py
-  
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install Kaggle CLI
+        run: |
+          pip install kaggle
+
+      - name: Authenticate with Kaggle
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          mkdir /root/.kaggle/
+          echo '{"username": "${KAGGLE_USERNAME}", "key": "${KAGGLE_KEY}"}' > /root/.kaggle/kaggle.json
+
+      - name: Download dataset from Kaggle
+        run: kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset
+
+      - name: Unzip dataset
+        run: unzip fake-and-real-news-dataset.zip
+
+      - name: Save to data folder
+        run: mv *.csv data/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: news-dataset
+          path: data/*.csv
