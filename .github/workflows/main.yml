@@ -1,4 +1,4 @@
-name: Download Kaggle Dataset and Save as Artifact
+name: Download Dataset from Kaggle
 
 on:
   workflow_dispatch:
@@ -9,30 +9,24 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.9
-      
       - name: Install Kaggle API
-        run: |
-          pip install kaggle
-      
-      - name: Authenticate with Kaggle
+        run: pip install kaggle
+      - name: Download dataset from Kaggle
         env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          KAGGLE_KEY: ${{ secrets.KAGGLE_API_KEY }}
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_N }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_K }}
         run: |
-          kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset --unzip -p ./data
-      
+          mkdir -p data
+          kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset -p data/
+      - name: Unzip dataset
+        run: unzip -qo data/*.zip -d data/
       - name: Filter CSV files
         run: |
           mv ./data/*.csv ./
           rm -rf ./data
       
       - name: Upload CSV files as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: csv-files
           path: |
