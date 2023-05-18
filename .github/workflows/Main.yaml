@@ -17,13 +17,10 @@ jobs:
         KAGGLE_USERNAME: ${{ secrets.KAGGLE_N }}
         KAGGLE_KEY: ${{ secrets.KAGGLE_K }}
       run: |
-        mkdir -p data
         kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset -p data/      
-    - name: Unzip dataset
-      run: unzip -q data/*.zip -d data/
     - name: Upload to Artifact
       uses: actions/upload-artifact@v3
       with:
         name: my-dataset
-        path: data/
+        path: data
   
