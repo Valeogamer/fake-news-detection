@@ -84,7 +84,6 @@ def spliter_learn(data, test_size=0.25):
   x = data['text']
   y = data['class']
   X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.25)
-  !mkdir -p /content/vectoriz/
   X_train.to_csv('X_train.csv')
   return X_train, X_test, Y_train, Y_test
 
@@ -95,17 +94,8 @@ def vectoriz(X_test, X_train):
   return xv_train, xv_test
 
 def save_info(model_info):
-  import os
-  from datetime import datetime
-  folder_path = ""
-  now = datetime.now()
-  current_time = now.strftime("%Y-%m-%d_%H-%M-%S")
-
-  filename = f"info_model_{current_time}.txt"
-  filepath = os.path.join(folder_path, filename)
-
-  with open(filepath, "w") as file:
-      for key, value in models_info.items():
+  with open('info.txt', "w") as file:
+      for key, value in model_info.items():
           file.write(f"{key}: {value}\n")
 
 # данные которые надо будет добавить при следуюущем обучении
@@ -208,7 +198,7 @@ def test_model():
       new_def_test = pd.DataFrame(testing_news)
       new_def_test["text"] = new_def_test["text"].apply(wordopt)
       new_x_test = new_def_test["text"]
-      X_train = pd.read_csv('vectoriz/X_train.csv')
+      X_train = pd.read_csv('X_train.csv')
       fitness = vectorization.fit_transform(X_train)
       new_xv_test = vectorization.transform(new_x_test)
       pred_LR = LR.predict(new_xv_test)
