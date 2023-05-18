@@ -24,7 +24,7 @@ ____
 ## Bag of words
 ____
 > Мешок слов — представление текста в виде массива, состоящего из отдельных слов и количества их использования. Применяется при анализе естественного языка и в составе алгоритмов компьютерного зрения.
-![Bag](https://github.com/Valeogamer/fake-news-detection/blob/main/image/bag.png?raw=true)
+![Bag](https://github.com/Valeogamer/fake-news-detection/blob/test/image/bag.png?raw=true)
 ## Target Balance
 ____
 #### **Ложных данных:**  __23481__ текстов
@@ -32,16 +32,17 @@ ____
 #### **Категории:** 'politicsNews', 'worldnews'
 #### **Дата:** 'April 1, 2016 ' - 'September 9, 2017 '
 
-![Target](https://github.com/Valeogamer/fake-news-detection/blob/main/image/bal_tar.png?raw=true)
+![Target](https://github.com/Valeogamer/fake-news-detection/blob/test/image/bal_tar.png?raw=true)
 ## Диаграммы
 + Component diagram;
 + Activity diagram;
 ____
 ### Component diagram
 
-![Component diagram](https://github.com/Valeogamer/fake-news-detection/blob/main/image/2.2.png?raw=true)
+![Component diagram](https://github.com/Valeogamer/fake-news-detection/blob/test/image/2.2.png?raw=true)
 
 ### Activity diagram
 
-![Activity diagram](https://github.com/Valeogamer/fake-news-detection/blob/main/image/1.1.png?raw=true)
+![Activity diagram](https://github.com/Valeogamer/fake-news-detection/blob/test/image/1.1.png?raw=true)
+
 
