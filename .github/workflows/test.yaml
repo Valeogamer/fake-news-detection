@@ -1,0 +1,41 @@
+name: Download Kaggle Dataset and Save as Artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-dataset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      
+      - name: Install Kaggle API
+        run: |
+          pip install kaggle
+      
+      - name: Authenticate with Kaggle
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_API_KEY }}
+
+      - name: Download dataset from Kaggle
+        run: |
+          kaggle datasets download <dataset-name> --unzip -p ./data
+      
+      - name: Filter CSV files
+        run: |
+          mv ./data/*.csv ./
+          rm -rf ./data
+      
+      - name: Upload CSV files as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: csv-files
+          path: |
+            *.csv
