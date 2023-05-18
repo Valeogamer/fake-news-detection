@@ -38,7 +38,7 @@ jobs:
       - name: Upgrade pip
         run: pip install --upgrade pip
       - name: Install dependencies
-        run: pip install -r req_new.txt
-      - name: Process data
+        run: pip install -r req.txt
+      - name: Test data
         run: |
           python test.py
