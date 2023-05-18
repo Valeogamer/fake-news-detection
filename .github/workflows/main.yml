@@ -57,6 +57,7 @@ jobs:
           path: Tester.csv
           
   Test-model:
+    needs: download-dataset
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
