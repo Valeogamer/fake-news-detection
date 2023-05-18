@@ -24,7 +24,7 @@ jobs:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_API_KEY }}
         run: |
-          kaggle datasets download <dataset-name> --unzip -p ./data
+          kaggle datasets download clmentbisaillon/fake-and-real-news-dataset --unzip -p ./data
       
       - name: Filter CSV files
         run: |
