@@ -211,4 +211,4 @@ def test_model():
     print(merged_data_true_fake['text'][i])
     manual_testing(merged_data_true_fake['text'][i])
 
-test_model()
+# test_model()
