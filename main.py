@@ -8,9 +8,11 @@ import string
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorization = TfidfVectorizer()
 import os
-
-data_fake = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/data/Fake.csv')
-data_true = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/data/True.csv')
+import zipfile
+with zipfile.ZipFile('csv-files.zip', 'r') as zip_ref:
+    zip_ref.extractall('data')
+data_fake = pd.read_csv('/data/Fake.csv')
+data_true = pd.read_csv('/data/True.csv')
 def info_size(data_fake, data_true):
   print("Кол-во Fake: ", data_fake.shape[0], "\nКол-во True: ", data_true.shape[0])
 def marks_class(data_fake, data_true):
