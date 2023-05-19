@@ -16,15 +16,8 @@ jobs:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_N }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_K }}
         run: |
-          mkdir -p data
-          kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset -p data/
-      - name: Unzip dataset
-        run: unzip -qo data/*.zip -d data/
-      - name: Filter CSV files
-        run: |
-          mv ./data/*.csv ./
-          rm -rf ./data
-      
+          kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset
+          unzip archive.zip
       - name: Upload CSV files as artifact - 1
         uses: actions/upload-artifact@v3.1.2
         with:
@@ -63,7 +56,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.2
       - name: Download artifact
-        uses: actions/download-artifact@v2.1.1
+        uses: actions/download-artifact@v3.0.2
         with:
           name: csv-files
       - name: Install Python
