@@ -43,6 +43,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.25)
 
 xv_train = vectorization.fit_transform(X_train)
 # xv_test = vectorization.transform(X_test)
+merged_data_true_fake = pd.read_csv('merged.csv')
 
 text = {}
 def test_model():
