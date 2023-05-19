@@ -11,9 +11,9 @@ import os
 
 # data_fake = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/Fake.csv')
 # data_true = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/True.csv')
+data_fake = pd.read_csv('Fake.csv')
+data_true = pd.read_csv('True.csv')
 
-data_fake = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/Fake.csv')
-data_true = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/True.csv')
 def info_size(data_fake, data_true):
   print("Кол-во Fake: ", data_fake.shape[0], "\nКол-во True: ", data_true.shape[0])
 def marks_class(data_fake, data_true):
