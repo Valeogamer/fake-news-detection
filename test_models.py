@@ -6,6 +6,11 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorization = TfidfVectorizer()
+
+LR = joblib.load('model_lr.joblib')
+DT = joblib.load('model_dt.joblib')
+GB = joblib.load('model_gb.joblib')
+RF = joblib.load('model_rf.joblib')
   
 def preproces_data(data_fake, data_true):
   print("Предобработка!")
