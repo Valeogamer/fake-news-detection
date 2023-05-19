@@ -28,6 +28,7 @@ RF = joblib.load('model_rf.joblib')
 
 merged_data_true_fake = pd.read_csv('merged.csv')
 X_train = pd.read_csv('X_train.csv')
+fitness = vectorization.fit_transform(X_train)
 
 def test_model():
   print("Tecтирование модели!")
@@ -45,8 +46,6 @@ def test_model():
       new_def_test = pd.DataFrame(testing_news)
       new_def_test["text"] = new_def_test["text"].apply(wordopt)
       new_x_test = new_def_test["text"]
-      X_train = pd.read_csv('X_train.csv')
-      fitness = vectorization.fit_transform(X_train)
       new_xv_test = vectorization.transform(new_x_test)
       pred_LR = LR.predict(new_xv_test)
       pred_DT = DT.predict(new_xv_test)
@@ -61,8 +60,10 @@ def test_model():
     text['Ответ_ML'] = manual_testing(merged_data_true_fake['text'][i])
 
 test_model()
-def save_info(model_info):
+def save_info(text):
   with open('result.txt', "w") as file:
       for key, value in text.items():
           file.write(f"{key}: {value}\n")
   print("Сохранение: result.txt")
+
+save_info(text)
