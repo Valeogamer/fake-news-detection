@@ -1,6 +1,8 @@
 import pandas as pd
 import pickle
 import os
+import re
+import string
 from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorization = TfidfVectorizer()
