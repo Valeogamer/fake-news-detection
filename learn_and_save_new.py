@@ -10,7 +10,7 @@ vectorization = TfidfVectorizer()
 models_info = {}
 
 def save_info(model_info):
-  with open('info.txt', "w") as file:
+  with open('new_info.txt', "w") as file:
       for key, value in model_info.items():
           file.write(f"{key}: {value}\n")
   print("Сохранение: new_info.txt")
