@@ -1,7 +1,7 @@
 import pandas as pd
 import pickle
 from sklearn.metrics import classification_report
-from sklearn.externals import joblib
+import joblib
 from sklearn.model_selection import train_test_split
 
 models_info = {}
