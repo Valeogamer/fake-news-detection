@@ -59,11 +59,11 @@ def preproces_data(data_fake, data_true):
   data_merge.drop(['index'], axis=1, inplace=True)
   return data_merge
 
-def spliter_learn(data, test_size=0.25, flag=None): 
+def spliter_learn(data, flag=None): 
   print("Разделение на тестовые и обучающие")
   x = data['text']
   y = data['class']
-  X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size)
+  X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=0.4)
   X_train.to_csv('X_train.csv')
   X_test.to_csv('X_test.csv')
   Y_train.to_csv('Y_train.csv')
@@ -107,5 +107,5 @@ merged_data = preproces_data(data_fake, data_true)
 # Удаление мусора
 merged_data['text'] = merged_data['text'].apply(wordopt)
 # Разделение на обучающую и тестовую
-spliter_learn(merged_data, test_size=0.40)
+spliter_learn(merged_data)
 
