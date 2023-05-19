@@ -1,8 +1,11 @@
 import pandas as pd
-import pickle
+import string
+import re
 from sklearn.metrics import classification_report
 import joblib
 from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorization = TfidfVectorizer()
 
 models_info = {}
 
@@ -11,17 +14,43 @@ def save_info(model_info):
       for key, value in model_info.items():
           file.write(f"{key}: {value}\n")
   print("Сохранение: info.txt")
+  
+def preproces_data(data_fake, data_true):
+  print("Предобработка!")
+  print("Объединение данных")
+  data_merge = pd.concat([data_fake, data_true], axis = 0)
+  print("Удаление не нужных колонок")
+  data_merge = data_merge.drop(['title', 'subject', 'date'], axis = 1)
+  print("Смешивание данных")
+  data_merge = data_merge.sample(frac = 1) # cмешивание данных
+  print("Переиндексация")
+  data_merge.reset_index(inplace = True)
+  data_merge.drop(['index'], axis=1, inplace=True)
+  return data_merge
 
-print("Загрузка необходимых данных")
-with open('xv_train.pickle', 'rb') as f:
-    xv_train = pickle.load(f)
+def wordopt(text):
+  text = text.lower()
+  text = re.sub('\[.*?]', '', text)
+  text = re.sub("\\W", " ", text)
+  text = re.sub('https?://\S+|www\.\S+', '', text)
+  text = re.sub('<.*?>+', '', text)
+  text = re.sub('[%s]' % re.escape(string.punctuation), '', text)
+  text = re.sub('\n', '', text)
+  text = re.sub('\w*\d\w*', '', text)
+  return text
 
-with open('xv_test.pickle', 'rb') as f:
-    xv_test = pickle.load(f)
+data_f = pd.read_csv('Fake_new.csv')
+data_t = pd.read_csv('True_new.csv')
 
-Y_train = pd.read_csv('Y_train.csv')
-Y_test = pd.read_csv('Y_test.csv')
-merged_data_true_fake = pd.read_csv('merged.csv')
+data = preproces_data(data_f, data_t)
+data['text'] = data['text'].apply(wordopt)
+x = data['text']
+y = data['class']
+X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.25)
+
+
+xv_train = vectorization.fit_transform(X_train)
+xv_test = vectorization.transform(X_test)
 
 print('-----Модели-----')
 print("---LogisticRegression---")
