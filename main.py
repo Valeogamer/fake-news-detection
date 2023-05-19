@@ -9,6 +9,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 vectorization = TfidfVectorizer()
 import os
 
+# data_fake = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/Fake.csv')
+# data_true = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/True.csv')
+
 data_fake = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/Fake.csv')
 data_true = pd.read_csv('/home/runner/work/fake-news-detection/fake-news-detection/True.csv')
 def info_size(data_fake, data_true):
