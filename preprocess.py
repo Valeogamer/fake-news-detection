@@ -18,16 +18,16 @@ def save_add_data(flag, data_fake_add, data_true_add = None):
   if flag == 'new':
     str_1 = 'Fake_new.csv'
     str_2 = 'True_new.csv'
-    data_fake_add.to_csv(f'/content/new_file/{str_1}', index = False)
-    data_true_add.to_csv(f'/content/new_file/{str_2}', index = False)
+    data_fake_add.to_csv(f'{str_1}', index = False)
+    data_true_add.to_csv(f'{str_2}', index = False)
     print(f"Сохранение: {str_1}")
     print(f"Сохранение: {str_2}")
   elif flag == 'merge':
     data_fake_add.to_csv('merged.csv')
     print(f'Сохранение: merged.csv')
   elif flag == 'add':
-    data_fake_add.to_csv(f'/content/add_file/fake_add.csv', index = False)
-    data_true_add.to_csv(f'/content/add_file/true_add.csv', index = False)
+    data_fake_add.to_csv(f'fake_add.csv', index = False)
+    data_true_add.to_csv(f'true_add.csv', index = False)
     print(f"Сохранение: fake_add.csv")
     print(f"Сохранение: true_add.csv")
 
