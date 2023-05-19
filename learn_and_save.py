@@ -2,6 +2,8 @@ import pandas as pd
 import pickle
 import os
 from datetime import datetime
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorization = TfidfVectorizer()
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 import joblib
@@ -15,15 +17,19 @@ def save_info(model_info):
   print("Сохранение: info.txt")
 
 print("Загрузка необходимых данных")
-with open('xv_train.pickle', 'rb') as f:
-    xv_train = pickle.load(f)
+# with open('xv_train.pickle', 'rb') as f:
+#     xv_train = pickle.load(f)
 
-with open('xv_test.pickle', 'rb') as f:
-    xv_test = pickle.load(f)
+# with open('xv_test.pickle', 'rb') as f:
+#     xv_test = pickle.load(f)
 
 Y_train = pd.read_csv('Y_train.csv')
 Y_test = pd.read_csv('Y_test.csv')
+X_train = read_csv('X_train.csv')
+X_test = read_csv('X_test.csv')
 merged_data_true_fake = pd.read_csv('merged.csv')
+xv_train = vectorization.fit_transform(X_train)
+xv_test = vectorization.transform(X_test)
 
 print('-----Модели-----')
 print("---LogisticRegression---")
