@@ -9,10 +9,6 @@ from sklearn.externals import joblib
 models_info = {}
 
 def save_info(model_info):
-  now = datetime.now()
-  current_time = now.strftime("%Y-%m-%d_%H-%M-%S")
-  filename = f"info_model_{current_time}.txt"
-  filepath = os.path.join('', filename)
   with open('info.txt', "w") as file:
       for key, value in model_info.items():
           file.write(f"{key}: {value}\n")
