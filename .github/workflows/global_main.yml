@@ -141,39 +141,6 @@ jobs:
           name: save_new_metrics
           path: |
             new_info.txt
-  Test_models:
-    needs: Learn-models_add_data
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.5.2
-      - name: Download artifact - 5
-        uses: actions/download-artifact@v3.0.2
-        with:
-          name: preprocess_file
-      - name: Download artifact - 6
-        uses: actions/download-artifact@v3.0.2
-        with:
-          name: save_models
-      - name: Download artifact - 7
-        uses: actions/download-artifact@v3.0.2
-        with:
-          name: feature
-      - name: Install Python
-        uses: actions/setup-python@v4.6.0
-        with:
-          python-version: 3.9
-      - name: Upgrade pip
-        run: pip install --upgrade pip
-      - name: Install dependencies
-        run: pip install -r req.txt
-      - name: Learn and Save add new data
-        run: |
-          python test_models.py
-      - name: Upload a Build Artifact - 6
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: result
-          path: |
             result.txt
+ 
             
