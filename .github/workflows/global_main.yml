@@ -76,8 +76,7 @@ jobs:
         with:
           name: feature
           path: |
-            xv_train.pickle
-            xv_test.pickle
+            vectorizer.joblib
 
   Learn-and-save-models:
     needs: Feature-Extraction
@@ -156,6 +155,10 @@ jobs:
         uses: actions/download-artifact@v3.0.2
         with:
           name: save_models
+      - name: Download artifact - 7
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: feature
       - name: Install Python
         uses: actions/setup-python@v4.6.0
         with:
