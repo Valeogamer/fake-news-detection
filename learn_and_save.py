@@ -6,7 +6,7 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 # vectorization = TfidfVectorizer()
-vectorization = joblib.load('vectorizer.joblib')
+xv_train = joblib.load('vectorizer.joblib')
 
 models_info = {}
 
