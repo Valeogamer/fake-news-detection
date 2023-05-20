@@ -1,0 +1,82 @@
+name: Download Dataset from Kaggle
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-dataset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.2
+      - name: Install Kaggle API
+        run: pip install kaggle
+      - name: Download dataset from Kaggle
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_N }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_K }}
+        run: |
+          kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset
+          unzip fake-and-real-news-dataset.zip
+      - name: Upload CSV files as artifact - 1
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: csv-files
+          path: |
+            *.csv
+      - name: Install Python
+        uses: actions/setup-python@v4.6.0
+        with:
+          python-version: 3.9
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+      - name: Install dependencies
+        run: pip install -r req.txt
+      - name: Test data
+        run: |
+          python test.py
+      - name: Upload a Build Artifact - 2
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: csv_fi
+          path: Test.csv
+      - name: Tester data
+        run: |
+          python tester.py
+      - name: Upload a Build Artifact - 3
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: new_csv_fi
+          path: Tester.csv
+          
+  Test-model:
+    needs: download-dataset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.2
+      - name: Download artifact
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: csv-files
+      - name: Install Python
+        uses: actions/setup-python@v4.6.0
+        with:
+          python-version: 3.9
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+      - name: Install dependencies
+        run: pip install -r req.txt
+      - name: Run main
+        run: |
+          python main.py
+      - name: Upload a Build Artifact - 4
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: new_file
+          path: |
+            Fake_add.csv
+            True_add.csv
+            X_train.csv
+            info.txt
+            

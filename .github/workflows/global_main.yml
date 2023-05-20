@@ -1,0 +1,147 @@
+name: fake_news_detection
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-dataset-processing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.2
+      - name: Install Kaggle API
+        run: pip install kaggle
+      - name: Download dataset from Kaggle
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_N }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_K }}
+        run: |
+          kaggle datasets download -d clmentbisaillon/fake-and-real-news-dataset
+          unzip fake-and-real-news-dataset.zip
+      - name: Upload CSV files as artifact - 1
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: csv-files
+          path: |
+            *.csv
+      - name: Install Python
+        uses: actions/setup-python@v4.6.0
+        with:
+          python-version: 3.9
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+      - name: Install dependencies
+        run: pip install -r req.txt
+      - name: Preprocessing
+        run: |
+          python preprocess.py
+      - name: Upload a Build Artifact - 2
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: preprocess_file
+          path: |
+            fake_add.csv
+            true_add.csv
+            merged.csv
+            Fake_new.csv
+            True_new.csv
+            X_train.csv
+            X_test.csv
+            Y_train.csv
+            Y_test.csv
+          
+  Feature-Extraction:
+    needs: download-dataset-processing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.2
+      - name: Download artifact - 1
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: preprocess_file
+      - name: Install Python
+        uses: actions/setup-python@v4.6.0
+        with:
+          python-version: 3.9
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+      - name: Install dependencies
+        run: pip install -r req.txt
+      - name: Feature
+        run: |
+          python feature.py
+      - name: Upload a Build Artifact - 3
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: feature
+          path: |
+            vectorizer.joblib
+
+  Learn-and-save-models:
+    needs: Feature-Extraction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.2
+      - name: Download artifact - 2
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: preprocess_file
+      - name: Download artifact - 3
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: feature
+      - name: Install Python
+        uses: actions/setup-python@v4.6.0
+        with:
+          python-version: 3.9
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+      - name: Install dependencies
+        run: pip install -r req.txt
+      - name: Learn and Save
+        run: |
+          python learn_and_save.py
+      - name: Upload a Build Artifact - 4
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: save_models
+          path: |
+            info.txt
+            model_lr.joblib
+            model_dt.joblib
+            model_gb.joblib
+            model_rf.joblib
+            result.txt
+
+  Learn-models_add_data:
+    needs: Learn-and-save-models
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.2
+      - name: Download artifact - 4
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: preprocess_file
+      - name: Install Python
+        uses: actions/setup-python@v4.6.0
+        with:
+          python-version: 3.9
+      - name: Upgrade pip
+        run: pip install --upgrade pip
+      - name: Install dependencies
+        run: pip install -r req.txt
+      - name: Learn and Save add new data
+        run: |
+          python learn_and_save_new.py
+      - name: Upload a Build Artifact - 5
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: save_new_metrics
+          path: |
+            new_info.txt
+            result.txt
+ 
+            
