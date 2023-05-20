@@ -36,15 +36,6 @@ def wordopt(text):
   text = re.sub('\w*\d\w*', '', text)
   return text
 
-data_f = pd.read_csv('Fake_new.csv')
-data_t = pd.read_csv('True_new.csv')
-
-data = preproces_data(data_f, data_t)
-data['text'] = data['text'].apply(wordopt)
-x = data['text']
-y = data['class']
-X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.25)
-
 merged_data_true_fake = pd.read_csv('merged.csv')
 
 text = {}
