@@ -63,7 +63,7 @@ def spliter_learn(data, flag=None):
   print("Разделение на тестовые и обучающие")
   x = data['text']
   y = data['class']
-  X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=0.4)
+  X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=0.25)
   X_train.to_csv('X_train.csv')
   X_test.to_csv('X_test.csv')
   Y_train.to_csv('Y_train.csv')
