@@ -5,7 +5,7 @@ from sklearn.metrics import classification_report
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-vectorization = TfidfVectorizer()
+vectorization = joblib.load('vectorizer.joblib')
 
 LR = joblib.load('model_lr.joblib')
 DT = joblib.load('model_dt.joblib')
@@ -45,9 +45,6 @@ x = data['text']
 y = data['class']
 X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.25)
 
-
-xv_train = vectorization.fit_transform(X_train)
-# xv_test = vectorization.transform(X_test)
 merged_data_true_fake = pd.read_csv('merged.csv')
 
 text = {}
