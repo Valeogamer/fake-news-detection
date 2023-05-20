@@ -127,3 +127,44 @@ models_info['RF CR: '] = classification_report(Y_test, pred_lr)
 # joblib.dump(RF, 'model_rf.joblib')
 
 save_info(models_info)
+
+merged_data_true_fake = pd.read_csv('merged.csv')
+
+text = {}
+def test_model():
+  print("Tecтирование модели!")
+  print("Внимание! Функция ввода временно отключена!")
+  def output_lable(n):
+    if n == 0:
+      return "Лживая новость!"
+    elif n == 1:
+      return "Правдивая новость"
+    else:
+      return 'Необработанный случай'
+
+  def manual_testing(news):
+      testing_news = {"text": [news]}
+      new_def_test = pd.DataFrame(testing_news)
+      new_def_test["text"] = new_def_test["text"].apply(wordopt)
+      new_x_test = new_def_test["text"]
+      new_xv_test = vectorization.transform(new_x_test)
+      pred_LR = LR.predict(new_xv_test)
+      pred_DT = DT.predict(new_xv_test)
+      pred_GB = GB.predict(new_xv_test)
+      pred_RF = RF.predict(new_xv_test)
+      return f"LR Predict: {output_lable(pred_LR[0])} \nDT Predict: {output_lable(pred_DT[0])} \nGB Predict: {output_lable(pred_GB[0])} \nRF Predict: {output_lable(pred_RF[0])} "
+
+  for i in range(len(merged_data_true_fake['text'])):
+    # a = print('\n\n --- Ответ: ', merged_data_true_fake['class'][i], ' --- ')
+    text[f'{i}.Ответ:'] = merged_data_true_fake['class'][i]
+    text[f'{i}.Text:'] = merged_data_true_fake['text'][i]
+    text[f'{i}.Ответ_ML:'] = manual_testing(merged_data_true_fake['text'][i])
+
+test_model()
+def save_info(text):
+  with open('result.txt', "w") as file:
+      for key, value in text.items():
+          file.write(f"{key}: {value}\n")
+  print("Сохранение: result.txt")
+
+save_info(text)
