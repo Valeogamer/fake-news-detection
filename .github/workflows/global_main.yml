@@ -113,6 +113,7 @@ jobs:
             model_dt.joblib
             model_gb.joblib
             model_rf.joblib
+            result.txt
 
   Learn-models_add_data:
     needs: Learn-and-save-models
