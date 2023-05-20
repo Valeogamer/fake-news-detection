@@ -5,8 +5,7 @@ from sklearn.metrics import classification_report
 import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-# vectorization = TfidfVectorizer()
-xv_train = joblib.load('vectorizer.joblib')
+vectorization = TfidfVectorizer()
 
 models_info = {}
 
@@ -50,7 +49,7 @@ y = data['class']
 X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.25)
 
 
-# xv_train = vectorization.fit_transform(X_train)
+xv_train = vectorization.fit_transform(X_train)
 xv_test = xv_train.transform(X_test)
 
 print('-----Модели-----')
