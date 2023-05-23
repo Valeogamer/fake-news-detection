@@ -89,9 +89,33 @@ info_size(data_fake, data_true)
 
 save_add_data('new', data_fake, data_true)
 
+data_fake_old = pd.read_csv('Fake_new.csv')
+data_true_old = pd.read_csv('True_new.csv')
 # предобработка основных данных
-merged_data = preproces_data(data_fake, data_true)
+merged_data = preproces_data(data_fake_old, data_true_old)
 # Удаление мусора
 merged_data['text'] = merged_data['text'].apply(wordopt)
 # Разделение на обучающую и тестовую
 merged_data.to_csv('main_data.csv', index=False, header=True)
+info_size(data_fake, data_true)
+def compound():
+  print("Объединение")
+  data_fake_orig = pd.read_csv('Fake_new.csv')
+  data_fake_add = pd.read_csv('fake_add.csv')
+  fake = pd.concat([data_fake_orig, data_fake_add], axis=0)
+  fake.to_csv('Fake_up_learn.csv', index=False)
+  data_true_orig = pd.read_csv('True_new.csv')
+  data_true_add = pd.read_csv('true_add.csv')
+  true = pd.concat([data_fake_orig, data_fake_add], axis=0)
+  true.to_csv('True_up_learn.csv', index=False)
+compound()
+data_fake_new = pd.read_csv('Fake_up_learn.csv')
+data_true_new = pd.read_csv('True_up_learn.csv')
+# предобработка основных данных
+merged_data_new = preproces_data(data_fake_new, data_true_new)
+# Удаление мусора
+merged_data_new['text'] = merged_data_new['text'].apply(wordopt)
+# Разделение на обучающую и тестовую
+merged_data.to_csv('main_data_new.csv', index=False, header=True)
+print(merged_data.shape)
+print(merged_data_new.shape)
