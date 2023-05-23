@@ -127,7 +127,7 @@ jobs:
       - name: Download artifact - 5
         uses: actions/download-artifact@v3.0.2
         with:
-          name: save_models
+          name: save_models_info_metrics
       - name: Install Python
         uses: actions/setup-python@v4.6.0
         with:
