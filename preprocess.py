@@ -1,5 +1,4 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
 import re
 import string
 
@@ -18,16 +17,16 @@ def save_add_data(flag, data_fake_add, data_true_add = None):
   if flag == 'new':
     str_1 = 'Fake_new.csv'
     str_2 = 'True_new.csv'
-    data_fake_add.to_csv(f'{str_1}', index = False)
-    data_true_add.to_csv(f'{str_2}', index = False)
+    data_fake_add.to_csv(f'{str_1}', index = False, header=True)
+    data_true_add.to_csv(f'{str_2}', index = False, header=True)
     print(f"Сохранение: {str_1}")
     print(f"Сохранение: {str_2}")
   elif flag == 'merge':
-    data_fake_add.to_csv('merged.csv')
+    data_fake_add.to_csv('merged.csv', index=False,  header=True)
     print(f'Сохранение: merged.csv')
   elif flag == 'add':
-    data_fake_add.to_csv(f'fake_add.csv', index = False)
-    data_true_add.to_csv(f'true_add.csv', index = False)
+    data_fake_add.to_csv(f'fake_add.csv', index = False,  header=True)
+    data_true_add.to_csv(f'true_add.csv', index = False,  header=True)
     print(f"Сохранение: fake_add.csv")
     print(f"Сохранение: true_add.csv")
 
@@ -58,18 +57,6 @@ def preproces_data(data_fake, data_true):
   data_merge.reset_index(inplace = True)
   data_merge.drop(['index'], axis=1, inplace=True)
   return data_merge
-
-def spliter_learn(data, flag=None): 
-  print("Разделение на тестовые и обучающие")
-  x = data['text']
-  y = data['class']
-  X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=0.25)
-  X_train.to_csv('X_train.csv')
-  X_test.to_csv('X_test.csv')
-  Y_train.to_csv('Y_train.csv')
-  Y_test.to_csv('Y_test.csv')
-  if flag:
-    return X_train, X_test, Y_train, Y_test
 
 def wordopt(text):
   """
@@ -107,5 +94,4 @@ merged_data = preproces_data(data_fake, data_true)
 # Удаление мусора
 merged_data['text'] = merged_data['text'].apply(wordopt)
 # Разделение на обучающую и тестовую
-spliter_learn(merged_data)
-
+merged_data.to_csv('main_data.csv', index=False, header=True)
