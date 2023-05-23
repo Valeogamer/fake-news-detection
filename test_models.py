@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.metrics import classification_report
 import pickle
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.feature_extraction.text import TfidfVectorizer
 
 def save_info(text):
     with open('result.txt', "w") as file:
