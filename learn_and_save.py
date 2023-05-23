@@ -41,3 +41,5 @@ models_info['LR time:'] = result_time
 models_info['accuracy:'] = LR.score(X_test, y_test)
 models_info['LR CR:'] = classification_report(y_test, pred_lr)
 save_info(models_info)
+with open('model_lr.pickle', 'wb') as file:
+    pickle.dump(LR, file)
