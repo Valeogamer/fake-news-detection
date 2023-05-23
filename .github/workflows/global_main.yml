@@ -45,10 +45,7 @@ jobs:
             merged.csv
             Fake_new.csv
             True_new.csv
-            X_train.csv
-            X_test.csv
-            Y_train.csv
-            Y_test.csv
+            main_data.csv
           
   Feature-Extraction:
     needs: download-dataset-processing
@@ -76,7 +73,8 @@ jobs:
         with:
           name: feature
           path: |
-            vectorizer.joblib
+            vectorizer.pickle
+            features.pickle
 
   Learn-and-save-models:
     needs: Feature-Extraction
@@ -109,13 +107,9 @@ jobs:
           name: save_models
           path: |
             info.txt
-            model_lr.joblib
-            model_dt.joblib
-            model_gb.joblib
-            model_rf.joblib
-            result.txt
-
-  Learn-models_add_data:
+            model_lr.pickle
+            
+  Test_models:
     needs: Learn-and-save-models
     runs-on: ubuntu-latest
     steps:
@@ -125,6 +119,14 @@ jobs:
         uses: actions/download-artifact@v3.0.2
         with:
           name: preprocess_file
+      - name: Download artifact - 5
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: feature
+      - name: Download artifact - 5
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: save_models
       - name: Install Python
         uses: actions/setup-python@v4.6.0
         with:
@@ -133,15 +135,7 @@ jobs:
         run: pip install --upgrade pip
       - name: Install dependencies
         run: pip install -r req.txt
-      - name: Learn and Save add new data
+      - name: Learn and Save
         run: |
-          python learn_and_save_new.py
-      - name: Upload a Build Artifact - 5
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: save_new_metrics
-          path: |
-            new_info.txt
-            result.txt
- 
+          python test_models.py
             
