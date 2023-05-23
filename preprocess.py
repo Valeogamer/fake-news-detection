@@ -31,15 +31,15 @@ def save_add_data(flag, data_fake_add, data_true_add = None):
     print(f"Сохранение: fake_add.csv")
     print(f"Сохранение: true_add.csv")
 
-def split_data(data_fake, data_true): # вернет два dataframe. в каждом по 10 элеметов из true и из false
+def split_data(data_fake, data_true, n): # вернет два dataframe. в каждом по 10 элеметов из true и из false
   print("Подготовка данных для тестов")
   print("По 10 данных с каждого файла для тестов!")
-  data_fake_testing = data_fake.tail(10)
-  for i in range(data_fake.shape[0]-1, (data_fake.shape[0] - 10), -1):
+  data_fake_testing = data_fake.tail(n)
+  for i in range(data_fake.shape[0]-1, (data_fake.shape[0] - n), -1):
     data_fake.drop([i], axis = 0, inplace = True)
 
-  data_true_testing = data_true.tail(10)
-  for i in range(data_true.shape[0]-1, (data_true.shape[0] - 10), -1):
+  data_true_testing = data_true.tail(n)
+  for i in range(data_true.shape[0]-1, (data_true.shape[0] - n), -1):
     data_true.drop([i], axis = 0, inplace = True)
   
   return data_fake_testing, data_true_testing
@@ -89,12 +89,12 @@ info_size(data_fake, data_true)
 marks_class(data_fake, data_true)
 
 print('данные которые надо будет добавить при следуюущем обучении')
-data_fake_add, data_true_add = split_data(data_fake, data_true)
+data_fake_add, data_true_add = split_data(data_fake, data_true, n=10000)
 save_add_data('add', data_fake_add, data_true_add)
 info_size(data_fake, data_true)
 
 print('Данные для тестов: 10 true, 10 fake')
-data_fake_test, data_true_test = split_data(data_fake, data_true)
+data_fake_test, data_true_test = split_data(data_fake, data_true, n=10)
 # ставим метки, объединяем, удаляем не нужные колонки и получаем 1 файл для теста
 merged_data_true_fake = preproces_data(data_fake_test, data_true_test)
 save_add_data('merge', merged_data_true_fake)
