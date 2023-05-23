@@ -50,6 +50,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
 
   with open(f'model_lr_{new}.pickle', 'wb') as file:
     pickle.dump(LR, file)
-
+old = 'old'
+new = 'new'
 models(X_train, y_train, X_test, y_test, new=old)
 models(X_train_new, y_train_new, X_test_new, y_test_new, new=new)
