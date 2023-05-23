@@ -40,12 +40,9 @@ jobs:
         with:
           name: preprocess_file
           path: |
-            fake_add.csv
-            true_add.csv
             merged.csv
-            Fake_new.csv
-            True_new.csv
             main_data.csv
+            main_data_new.csv
           
   Feature-Extraction:
     needs: download-dataset-processing
@@ -73,8 +70,10 @@ jobs:
         with:
           name: feature
           path: |
-            vectorizer.pickle
-            features.pickle
+            vectorizer_old.pickle
+            features_old.pickle
+            vectorizer_new.pickle
+            features_new.pickle
 
   Learn-and-save-models:
     needs: Feature-Extraction
@@ -104,10 +103,12 @@ jobs:
       - name: Upload a Build Artifact - 4
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: save_models
+          name: save_models_info_metrics
           path: |
-            info.txt
-            model_lr.pickle
+            info_new.txt
+            info_old.txt
+            model_lr_old.pickle
+            model_lr_new.pickle
             
   Test_models:
     needs: Learn-and-save-models
@@ -138,4 +139,10 @@ jobs:
       - name: Learn and Save
         run: |
           python test_models.py
-            
+      - name: Upload a Build Artifact - 4
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: save_result_predict
+          path: |
+           result.txt
+           result_new.txt
