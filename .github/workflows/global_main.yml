@@ -163,6 +163,6 @@ jobs:
          rm -rf results && mkdir results
          cp ${{ github.workspace }}/result.txt results/
          cp ${{ github.workspace }}/result_new.txt results/
-         git add result/
+         git add results/
          git commit -m "update"
          git push
