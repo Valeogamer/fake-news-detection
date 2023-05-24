@@ -109,6 +109,16 @@ jobs:
             info_old.txt
             model_lr_old.pickle
             model_lr_new.pickle
+      - name: Commit and Push changes - 1
+        run: |
+          git config --global user.email "zhilin.valentin.72@gmail.com"
+          git config --global user.name "Valentin"
+          rm -rf model_repo && mkdir model_repo
+          git add model_repo/info_new.txt
+          git commit -m "info_new"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET }}
             
   Test_models:
     needs: Learn-and-save-models
@@ -146,10 +156,12 @@ jobs:
           path: |
            result.txt
            result_new.txt
-      - name: Commit and Push changes - 1
+      - name: Commit and Push changes - 2
         run: |
+          git config --global user.email "zhilin.valentin.72@gmail.com"
+          git config --global user.name "Valentin"
           rm -rf results && mkdir results
-          git add results
+          git add results/results.txt
           git commit -m "Results"
           git push
         env:
