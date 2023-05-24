@@ -145,7 +145,7 @@ jobs:
         run: pip install --upgrade pip
       - name: Install dependencies
         run: pip install -r req.txt
-      - name: Learn and Save
+      - name: Test models
         run: |
           python test_models.py
       - name: Upload a Build Artifact - 4
