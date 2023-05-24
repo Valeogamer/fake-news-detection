@@ -47,7 +47,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   print(f'accuracy {new}:', LR.score(X_test, y_test))
   print(classification_report(y_test, pred_lr))
   models_info[f'LR time {new}:'] = result_time
-  models_info[f'accuracy {new}:'] = LR.score(X_test, y_test)
+  models_info[f'accuracy LR {new}:'] = LR.score(X_test, y_test)
   models_info[f'LR CR {new}:'] = classification_report(y_test, pred_lr)
   
   print("---DecisionTreeClassifier---")
@@ -60,7 +60,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   DT.score(X_test, y_test)
   print(classification_report(y_test, pred_dt))
   models_info['DT time:'] = result_time
-  models_info[f'accuracy {new}:'] = DT.score(X_test, y_test)
+  models_info[f'accuracy DT {new}:'] = DT.score(X_test, y_test)
   models_info['DT CR: '] = classification_report(y_test, pred_lr)
   
   print("---GradientBoostingClassifier---")
@@ -73,7 +73,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   GB.score(X_test, y_test)
   print(classification_report(y_test, pred_gb))
   models_info['GB time:'] = result_time
-  models_info[f'accuracy {new}:'] = GB.score(X_test, y_test)
+  models_info[f'accuracy GB {new}:'] = GB.score(X_test, y_test)
   models_info['GB CR: '] = classification_report(y_test, pred_lr)
 
   print("---RandomForestClassifier---")
@@ -86,7 +86,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   RF.score(X_test, y_test)
   print(classification_report(y_test, pred_rf))
   models_info['RF time:'] = result_time
-  models_info[f'accuracy {new}:'] = RF.score(X_test, y_test)
+  models_info[f'accuracy RF {new}:'] = RF.score(X_test, y_test)
   models_info['RF CR: '] = classification_report(y_test, pred_lr)
   save_info(models_info, new)
 
