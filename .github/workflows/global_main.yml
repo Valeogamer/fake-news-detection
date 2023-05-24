@@ -158,6 +158,7 @@ jobs:
         run: |
          git config --global user.email "zhilin.valentin.72@gmail.com"
          git config --global user.name "Valentin"
+         git pull origin new_test
          rm -rf results && mkdir results
          cp ${{ github.workspace }}/result_new.txt results/
          git add results/
