@@ -52,42 +52,42 @@ def models(X_train, y_train, X_test, y_test, new=None):
   
   print("---DecisionTreeClassifier---")
   DT = DecisionTreeClassifier()
-  DT.fit(xv_train, Y_train)
+  DT.fit(X_train, y_train)
   start = time.time()
-  pred_dt = DT.predict(xv_test)
+  pred_dt = DT.predict(X_test)
   result_time = time.time() - start
   print(result_time)
-  DT.score(xv_test, Y_test)
-  print(classification_report(Y_test, pred_dt))
+  DT.score(X_test, y_test)
+  print(classification_report(y_test, pred_dt))
   models_info['DT time:'] = result_time
   models_info[f'accuracy {new}:'] = DT.score(X_test, y_test)
-  models_info['DT CR: '] = classification_report(Y_test, pred_lr)
+  models_info['DT CR: '] = classification_report(y_test, pred_lr)
   
   print("---GradientBoostingClassifier---")
   GB = GradientBoostingClassifier(random_state=0)
-  GB.fit(xv_train, Y_train)
+  GB.fit(X_train, y_train)
   start = time.time()
-  pred_gb = GB.predict(xv_test)
+  pred_gb = GB.predict(X_test)
   result_time =time.time() - start
   print(result_time)
-  GB.score(xv_test, Y_test)
-  print(classification_report(Y_test, pred_gb))
+  GB.score(X_test, y_test)
+  print(classification_report(y_test, pred_gb))
   models_info['GB time:'] = result_time
   models_info[f'accuracy {new}:'] = GB.score(X_test, y_test)
-  models_info['GB CR: '] = classification_report(Y_test, pred_lr)
+  models_info['GB CR: '] = classification_report(y_test, pred_lr)
 
   print("---RandomForestClassifier---")
   RF = RandomForestClassifier()
-  RF.fit(xv_train, Y_train)
+  RF.fit(X_train, y_train)
   start = time.time()
-  pred_rf = RF.predict(xv_test)
+  pred_rf = RF.predict(X_test)
   result_time = time.time() - start
   print(result_time)
-  RF.score(xv_test, Y_test)
-  print(classification_report(Y_test, pred_rf))
+  RF.score(X_test, y_test)
+  print(classification_report(y_test, pred_rf))
   models_info['RF time:'] = result_time
   models_info[f'accuracy {new}:'] = RF.score(X_test, y_test)
-  models_info['RF CR: '] = classification_report(Y_test, pred_lr)
+  models_info['RF CR: '] = classification_report(y_test, pred_lr)
   save_info(models_info, new)
 
   with open(f'model_lr_{new}.pickle', 'wb') as file:
