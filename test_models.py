@@ -41,7 +41,7 @@ with open('vectorizer_old.pickle', 'rb') as handle:
 test_model()
 
 def save_info_new(text):
-    with open('result.txt', "w") as file:
+    with open('result_new.txt', "w") as file:
         for key, value in text.items():
             file.write(f"{key}: {value}\n")
     print("Сохранение: result_new.txt")
