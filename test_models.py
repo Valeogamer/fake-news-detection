@@ -23,7 +23,11 @@ def test_model():
     def manual_testing(news):
         X_new = vectorizer.transform([news])
         pred_LR = LR.predict(X_new)
-        return f"LR Predict: {output_label(pred_LR[0])}"
+        pred_DT = DT.predict(X_new)
+        pred_GB = GB.predict(X_new)
+        pred_RF = RF.predict(X_new)
+        return print(f"LR Predict: {output_lable(pred_LR[0])} \nDT Predict: {output_lable(pred_DT[0])} \nGB Predict: {output_lable(pred_GB[0])} \nRF Predict: {output_lable(pred_RF[0])} ")
+
 
     merged_data_true_fake = pd.read_csv('merged.csv')
     text = {}
@@ -36,6 +40,12 @@ def test_model():
 
 with open('model_lr_old.pickle', 'rb') as handle:
     LR = pickle.load(handle)
+with open('model_dt_old.pickle', 'rb') as handle:
+    DT = pickle.load(handle)
+with open('model_gb_old.pickle', 'rb') as handle:
+    GB = pickle.load(handle)
+with open('model_rf_old.pickle', 'rb') as handle:
+    RF = pickle.load(handle)
 with open('vectorizer_old.pickle', 'rb') as handle:
     vectorizer = pickle.load(handle)
 test_model()
@@ -61,8 +71,11 @@ def test_model_new():
 
     def manual_testing(news):
         X_new = vectorizer_new.transform([news])
-        pred_LR = LR_new.predict(X_new)
-        return f"LR Predict: {output_label(pred_LR[0])}"
+        pred_LR = LR.predict(X_new)
+        pred_DT = DT.predict(X_new)
+        pred_GB = GB.predict(X_new)
+        pred_RF = RF.predict(X_new)
+        return print(f"LR Predict: {output_lable(pred_LR[0])} \nDT Predict: {output_lable(pred_DT[0])} \nGB Predict: {output_lable(pred_GB[0])} \nRF Predict: {output_lable(pred_RF[0])} ")
 
     merged_data_true_fake = pd.read_csv('merged.csv')
     text = {}
@@ -74,7 +87,13 @@ def test_model_new():
     save_info_new(text)
 
 with open('model_lr_new.pickle', 'rb') as handle:
-    LR_new = pickle.load(handle)
+    LR = pickle.load(handle)
+with open('model_dt_new.pickle', 'rb') as handle:
+    DT = pickle.load(handle)
+with open('model_gb_new.pickle', 'rb') as handle:
+    GB = pickle.load(handle)
+with open('model_rf_new.pickle', 'rb') as handle:
+    RF = pickle.load(handle)
 with open('vectorizer_new.pickle', 'rb') as handle:
     vectorizer_new = pickle.load(handle)
 test_model_new()
