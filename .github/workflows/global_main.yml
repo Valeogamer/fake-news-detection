@@ -109,6 +109,16 @@ jobs:
             info_old.txt
             model_lr_old.pickle
             model_lr_new.pickle
+      - name: Commit and Push changes - 1
+        run: |
+         git config --global user.email "zhilin.valentin.72@gmail.com"
+         git config --global user.name "Valentin"
+         rm -rf model_repo && mkdir model_repo
+         cp ${{ github.workspace }}/info_new.txt model_repo/
+         git add model_repo/
+         git commit -m "update"
+         git push
+
   Test_models:
     needs: Learn-and-save-models
     runs-on: ubuntu-latest
@@ -149,9 +159,7 @@ jobs:
         run: |
          git config --global user.email "zhilin.valentin.72@gmail.com"
          git config --global user.name "Valentin"
-         rm -rf model_repo && mkdir model_repo
-         cp ${{ github.workspace }}/info_new.txt model_repo/
-         git add model_repo/
+         git pull
          rm -rf results && mkdir results
          cp ${{ github.workspace }}/result.txt results/
          cp ${{ github.workspace }}/result_new.txt results/
