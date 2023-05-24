@@ -146,3 +146,11 @@ jobs:
           path: |
            result.txt
            result_new.txt
+      - name: Commit and Push changes - 1
+        run: |
+          rm -rf results && mkdir results
+          git add results
+          git commit -m "Results"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET }}
