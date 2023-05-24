@@ -12,7 +12,7 @@ def test_model():
     print("Тестирование модели!")
     print("Внимание! Функция ввода временно отключена!")
 
-    def output_label(n):
+    def output_lable(n):
         if n == 0:
             return "Лживая новость!"
         elif n == 1:
@@ -61,7 +61,7 @@ def test_model_new():
     print("Тестирование модели!")
     print("Внимание! Функция ввода временно отключена!")
 
-    def output_label(n):
+    def output_lable(n):
         if n == 0:
             return "Лживая новость!"
         elif n == 1:
