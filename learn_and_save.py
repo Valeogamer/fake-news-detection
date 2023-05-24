@@ -4,6 +4,9 @@ import pickle
 from sklearn.model_selection import train_test_split
 import time
 from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 # from sklearn.feature_extraction.text import TfidfVectorizer
 
 models_info = {}
@@ -46,10 +49,55 @@ def models(X_train, y_train, X_test, y_test, new=None):
   models_info[f'LR time {new}:'] = result_time
   models_info[f'accuracy {new}:'] = LR.score(X_test, y_test)
   models_info[f'LR CR {new}:'] = classification_report(y_test, pred_lr)
+  
+  print("---DecisionTreeClassifier---")
+  DT = DecisionTreeClassifier()
+  DT.fit(xv_train, Y_train)
+  start = time.time()
+  pred_dt = DT.predict(xv_test)
+  result_time = time.time() - start
+  print(result_time)
+  DT.score(xv_test, Y_test)
+  print(classification_report(Y_test, pred_dt))
+  models_info['DT time:'] = result_time
+  models_info[f'accuracy {new}:'] = DT.score(X_test, y_test)
+  models_info['DT CR: '] = classification_report(Y_test, pred_lr)
+  
+  print("---GradientBoostingClassifier---")
+  GB = GradientBoostingClassifier(random_state=0)
+  GB.fit(xv_train, Y_train)
+  start = time.time()
+  pred_gb = GB.predict(xv_test)
+  result_time =time.time() - start
+  print(result_time)
+  GB.score(xv_test, Y_test)
+  print(classification_report(Y_test, pred_gb))
+  models_info['GB time:'] = result_time
+  models_info[f'accuracy {new}:'] = GB.score(X_test, y_test)
+  models_info['GB CR: '] = classification_report(Y_test, pred_lr)
+
+  print("---RandomForestClassifier---")
+  RF = RandomForestClassifier()
+  RF.fit(xv_train, Y_train)
+  start = time.time()
+  pred_rf = RF.predict(xv_test)
+  result_time = time.time() - start
+  print(result_time)
+  RF.score(xv_test, Y_test)
+  print(classification_report(Y_test, pred_rf))
+  models_info['RF time:'] = result_time
+  models_info[f'accuracy {new}:'] = RF.score(X_test, y_test)
+  models_info['RF CR: '] = classification_report(Y_test, pred_lr)
   save_info(models_info, new)
 
   with open(f'model_lr_{new}.pickle', 'wb') as file:
     pickle.dump(LR, file)
+  with open(f'model_dt_{new}.pickle', 'wb') as file:
+    pickle.dump(DT, file)
+  with open(f'model_gb_{new}.pickle', 'wb') as file:
+    pickle.dump(GB, file)
+  with open(f'model_rf_{new}.pickle', 'wb') as file:
+    pickle.dump(RF, file)
 old = 'old'
 new = 'new'
 models(X_train, y_train, X_test, y_test, new=old)
