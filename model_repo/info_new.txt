@@ -1,20 +1,50 @@
-LR time old:: 0.0038306713104248047
-accuracy old:: 0.9843279083785413
+LR time old:: 0.0030562877655029297
+accuracy old:: 0.9859353023909986
 LR CR old::               precision    recall  f1-score   support
 
-           0       0.99      0.98      0.99      2692
-           1       0.98      0.99      0.98      2285
+           0       0.99      0.99      0.99      2697
+           1       0.98      0.98      0.98      2280
 
     accuracy                           0.98      4977
    macro avg       0.98      0.98      0.98      4977
 weighted avg       0.98      0.98      0.98      4977
 
-LR time new:: 0.004929304122924805
-accuracy new:: 0.982987273945077
+DT time:: 0.0919489860534668
+DT CR: :               precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99      4081
+           1       0.98      0.98      0.98      3384
+
+    accuracy                           0.98      7465
+   macro avg       0.98      0.98      0.98      7465
+weighted avg       0.98      0.98      0.98      7465
+
+GB time:: 0.01847052574157715
+GB CR: :               precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99      4081
+           1       0.98      0.98      0.98      3384
+
+    accuracy                           0.98      7465
+   macro avg       0.98      0.98      0.98      7465
+weighted avg       0.98      0.98      0.98      7465
+
+RF time:: 0.7066550254821777
+RF CR: :               precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99      4081
+           1       0.98      0.98      0.98      3384
+
+    accuracy                           0.98      7465
+   macro avg       0.98      0.98      0.98      7465
+weighted avg       0.98      0.98      0.98      7465
+
+LR time new:: 0.007492542266845703
+accuracy new:: 0.9844608171466845
 LR CR new::               precision    recall  f1-score   support
 
-           0       0.99      0.98      0.98      4050
-           1       0.98      0.99      0.98      3415
+           0       0.99      0.99      0.99      4081
+           1       0.98      0.98      0.98      3384
 
     accuracy                           0.98      7465
    macro avg       0.98      0.98      0.98      7465
