@@ -118,9 +118,6 @@ jobs:
          git add model_repo/
          git commit -m "Add info_new.txt"
          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.SECRET }}
-            
   Test_models:
     needs: Learn-and-save-models
     runs-on: ubuntu-latest
