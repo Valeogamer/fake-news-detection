@@ -1,22 +1,22 @@
-LR time old:: 0.0027544498443603516
-accuracy old:: 0.9837251356238698
+LR time old:: 0.0027093887329101562
+accuracy old:: 0.9873417721518988
 LR CR old::               precision    recall  f1-score   support
 
-           0       0.98      0.99      0.98      2680
-           1       0.98      0.98      0.98      2297
+           0       0.99      0.99      0.99      2695
+           1       0.99      0.98      0.99      2282
 
-    accuracy                           0.98      4977
-   macro avg       0.98      0.98      0.98      4977
-weighted avg       0.98      0.98      0.98      4977
+    accuracy                           0.99      4977
+   macro avg       0.99      0.99      0.99      4977
+weighted avg       0.99      0.99      0.99      4977
 
-LR time new:: 0.00407099723815918
-accuracy new:: 0.9827193569993302
+LR time new:: 0.008085012435913086
+accuracy new:: 0.9858004018754186
 LR CR new::               precision    recall  f1-score   support
 
-           0       0.98      0.98      0.98      4034
-           1       0.98      0.98      0.98      3431
+           0       0.99      0.99      0.99      4065
+           1       0.99      0.98      0.98      3400
 
-    accuracy                           0.98      7465
-   macro avg       0.98      0.98      0.98      7465
-weighted avg       0.98      0.98      0.98      7465
+    accuracy                           0.99      7465
+   macro avg       0.99      0.99      0.99      7465
+weighted avg       0.99      0.99      0.99      7465
 
