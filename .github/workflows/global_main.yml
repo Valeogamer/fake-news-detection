@@ -159,9 +159,7 @@ jobs:
          git config --global user.email "zhilin.valentin.72@gmail.com"
          git config --global user.name "Valentin"
          rm -rf results && mkdir results
-         cp ${{ github.workspace }}/result.txt results/
+         cp ${{ github.workspace }}/result_new.txt results/
          git add results/
          git commit -m "Add result.txt"
          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.SECRET }}
