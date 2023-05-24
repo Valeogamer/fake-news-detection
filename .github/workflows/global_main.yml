@@ -115,6 +115,10 @@ jobs:
          rm -rf model_repo && mkdir model_repo
          cp ${{ github.workspace }}/info_new.txt model_repo/
          cp ${{ github.workspace }}/info_old.txt model_repo/
+         cp ${{ github.workspace }}/model_lr_old.pickle model_repo/
+         cp ${{ github.workspace }}/model_dt_old.pickle model_repo/
+         cp ${{ github.workspace }}/model_gb_old.pickle model_repo/
+         cp ${{ github.workspace }}/model_rf_old.pickle model_repo/
          git add model_repo/
          git commit -m "update"
          git push
