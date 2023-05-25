@@ -9,7 +9,6 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import RandomForestClassifier
 # from sklearn.feature_extraction.text import TfidfVectorizer
 
-models_info = {}
 models_info_new = {}
 
 def save_info(model_info, new):
@@ -37,6 +36,7 @@ X_train_new, X_test_new, y_train_new, y_test_new = train_test_split(X_new, combi
 
 print('-----Модели-----')
 def models(X_train, y_train, X_test, y_test, new=None):
+  models_info = {}
   print("---LogisticRegression---")
   LR = LogisticRegression()
   LR.fit(X_train, y_train)
@@ -51,6 +51,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   models_info[f'LR CR {new}:'] = classification_report(y_test, pred_lr)
   save_info(models_info, new)
   
+  models_info = {}
   print("---DecisionTreeClassifier---")
   DT = DecisionTreeClassifier()
   DT.fit(X_train, y_train)
@@ -65,6 +66,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   models_info['DT CR: '] = classification_report(y_test, pred_lr)
   save_info(models_info, new)
   
+  models_info = {}
   print("---GradientBoostingClassifier---")
   GB = GradientBoostingClassifier(random_state=0)
   GB.fit(X_train, y_train)
@@ -79,6 +81,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   models_info['GB CR: '] = classification_report(y_test, pred_lr)
   save_info(models_info, new)
 
+  models_info = {}
   print("---RandomForestClassifier---")
   RF = RandomForestClassifier()
   RF.fit(X_train, y_train)
