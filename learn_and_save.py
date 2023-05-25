@@ -13,7 +13,7 @@ models_info = {}
 models_info_new = {}
 
 def save_info(model_info, new):
-    with open(f'info_{new}.txt', "w") as file:
+    with open(f'info_{new}.txt', "a") as file:
         for key, value in model_info.items():
             file.write(f"{key}: {value}\n")
     print(f"Сохранение: info_{new}.txt")
@@ -49,6 +49,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   models_info[f'LR time {new}:'] = result_time
   models_info[f'accuracy LR {new}:'] = LR.score(X_test, y_test)
   models_info[f'LR CR {new}:'] = classification_report(y_test, pred_lr)
+  save_info(models_info, new)
   
   print("---DecisionTreeClassifier---")
   DT = DecisionTreeClassifier()
@@ -57,11 +58,12 @@ def models(X_train, y_train, X_test, y_test, new=None):
   pred_dt = DT.predict(X_test)
   result_time = time.time() - start
   print(result_time)
-  DT.score(X_test, y_test)
+  print(f'accuracy {new}:', DT.score(X_test, y_test))
   print(classification_report(y_test, pred_dt))
   models_info['DT time:'] = result_time
   models_info[f'accuracy DT {new}:'] = DT.score(X_test, y_test)
   models_info['DT CR: '] = classification_report(y_test, pred_lr)
+  save_info(models_info, new)
   
   print("---GradientBoostingClassifier---")
   GB = GradientBoostingClassifier(random_state=0)
@@ -70,11 +72,12 @@ def models(X_train, y_train, X_test, y_test, new=None):
   pred_gb = GB.predict(X_test)
   result_time =time.time() - start
   print(result_time)
-  GB.score(X_test, y_test)
+  print(f'accuracy {new}:', GB.score(X_test, y_test))
   print(classification_report(y_test, pred_gb))
   models_info['GB time:'] = result_time
   models_info[f'accuracy GB {new}:'] = GB.score(X_test, y_test)
   models_info['GB CR: '] = classification_report(y_test, pred_lr)
+  save_info(models_info, new)
 
   print("---RandomForestClassifier---")
   RF = RandomForestClassifier()
@@ -83,7 +86,7 @@ def models(X_train, y_train, X_test, y_test, new=None):
   pred_rf = RF.predict(X_test)
   result_time = time.time() - start
   print(result_time)
-  RF.score(X_test, y_test)
+  print(f'accuracy {new}:', RF.score(X_test, y_test))
   print(classification_report(y_test, pred_rf))
   models_info['RF time:'] = result_time
   models_info[f'accuracy RF {new}:'] = RF.score(X_test, y_test)
