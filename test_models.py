@@ -26,7 +26,7 @@ def test_model():
         pred_DT = DT.predict(X_new)
         pred_GB = GB.predict(X_new)
         pred_RF = RF.predict(X_new)
-        return print(f"LR Predict: {output_lable(pred_LR[0])} \nDT Predict: {output_lable(pred_DT[0])} \nGB Predict: {output_lable(pred_GB[0])} \nRF Predict: {output_lable(pred_RF[0])} ")
+        return f"LR Predict: {output_lable(pred_LR[0])} \nDT Predict: {output_lable(pred_DT[0])} \nGB Predict: {output_lable(pred_GB[0])} \nRF Predict: {output_lable(pred_RF[0])} "
 
 
     merged_data_true_fake = pd.read_csv('merged.csv')
@@ -75,7 +75,7 @@ def test_model_new():
         pred_DT = DT_new.predict(X_new)
         pred_GB = GB_new.predict(X_new)
         pred_RF = RF_new.predict(X_new)
-        return print(f"LR Predict: {output_lable(pred_LR[0])} \nDT Predict: {output_lable(pred_DT[0])} \nGB Predict: {output_lable(pred_GB[0])} \nRF Predict: {output_lable(pred_RF[0])} ")
+        return f"LR Predict: {output_lable(pred_LR[0])} \nDT Predict: {output_lable(pred_DT[0])} \nGB Predict: {output_lable(pred_GB[0])} \nRF Predict: {output_lable(pred_RF[0])} "
 
     merged_data_true_fake = pd.read_csv('merged.csv')
     text = {}
